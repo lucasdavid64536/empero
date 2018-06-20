@@ -290,6 +290,6 @@ async def binfo(ctx):
 
 
 
-bot.run(os.getenv["TOKEN"])
+bot.run(os.getenv("TOKEN"))
 
 
