@@ -8,7 +8,7 @@ import os
 
 
 logging.basicConfig(level='INFO')
-bot = commands.Bot(command_prefix='e!')
+bot = commands.Bot(command_prefix='e?')
 bot.load_extension("admin")
 bot.remove_command('help')
 
@@ -21,7 +21,7 @@ async def on_error(message, event, *args, **kwargs):
 @bot.listen()
 async def on_ready():
           print('Logging in as', bot.user.name)
-          await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='e!help'))
+          await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='e?help'))
                   
 
 @commands.cooldown(1, 5, commands.BucketType.user)  
@@ -63,7 +63,7 @@ async def help2(ctx):
 @bot.listen()
 async def on_message(message : discord.Message):
     if bot.user.mentioned_in(message):
-        await message.channel.send(":sleeping: | You woke me up :( . My prefix is `e!` , for a list of commands type `e!help`")
+        await message.channel.send(":sleeping: | You woke me up :( . My prefix is `e?` , for a list of commands type `e?help`")
 
 @bot.listen()
 async def on_command_error(ctx, error):
@@ -150,7 +150,7 @@ async def avatar(ctx, member: discord.Member=None):
 
 @bot.listen()
 async def on_message(message):
-    if message.content.lower() == 'e!support' and message.author != bot.user:
+    if message.content.lower() == 'e?support' and message.author != bot.user:
         await message.channel.send('The support server is: https://discord.gg/GF3RWsd')
 
 @commands.cooldown(1, 5, commands.BucketType.user)
