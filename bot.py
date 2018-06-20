@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 import logging
 import traceback
-
+import os
 
 
 logging.basicConfig(level='INFO')
@@ -290,6 +290,6 @@ async def binfo(ctx):
 
 
 
-bot.run('NDU5MDAwNzEyNTM4MzU3NzYw.Dgv1Pg.fdhfsBzue6cN_1QlZmzbaou1s-g')
+bot.run(os.getenv("TOKEN")
 
 
