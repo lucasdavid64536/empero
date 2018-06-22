@@ -135,7 +135,9 @@ async def avatar(ctx, member: discord.Member=None):
 
 
 
-
+@bot.command()
+async def setlistening(ctx):
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=message))
 
 
 
