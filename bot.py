@@ -93,7 +93,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermission):
             return await ctx.send(f':x: | I don`have permissions to do that, if you are the owner, make sure i have the Ban and Kick Players  permission')
     if isinstance(error, commands.CommandNotFound):
-        return await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}', delete_after=5)
+        return await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
     error = error.__cause__ or error
     tb = traceback.format_exception(type(error), error, error.__traceback__, limit=2, chain=False)
     tb = ''.join(tb)
