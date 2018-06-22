@@ -355,7 +355,8 @@ async def heal(self, ctx, user: discord.Member = None):
 			del self.infections[str(user.id) + ';' + str(ctx.guild.id)]
 			await ctx.send(('`' + user.name) + '` has been healed')
 		else:
-await ctx.send(('`' + user.name) + '` wasn`t infected')
+			await ctx.send(('`' + user.name) + '` wasn`t infected')
+
 
 bot.run(os.getenv("TOKEN"))
 
