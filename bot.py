@@ -31,8 +31,7 @@ async def help(ctx):
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
     em.set_author(name="Empero Help")
     em.add_field(name="**help**", value='Shows this message', inline=False)
-    em.add_field(name="**send**", value='Make the bot say whatever you want', inline=False)
-    em.add_field(name="**say**", value='Make the bot say whatever you want(in an embed)', inline=False)
+    em.add_field(name="**say**", value='Make the bot say whatever you want', inline=False)
     em.add_field(name="**ping**", value='Check the bot latency', inline=False)
     em.add_field(name="**search**", value='Search something on google', inline=False)
     em.add_field(name="**avatar**", value='Get somebody`s avatar', inline=False)
@@ -79,13 +78,6 @@ async def on_command_error(ctx, error):
 
 
 
-@commands.cooldown(1, 5, commands.BucketType.user)
-@bot.command()
-async def say(ctx, *, message):
-    """Make the BOT say what you want"""
-    embed = discord.Embed(description=message, color=0x00F5FF)
-    embed.set_footer(text=f'By {ctx.message.author}')
-    await ctx.send(embed=embed)
 
 @commands.cooldown(1, 5, commands.BucketType.user)
 @bot.command()
@@ -106,7 +98,7 @@ async def search(ctx, *, query):
 
 @commands.cooldown(1, 5, commands.BucketType.user)
 @bot.command()
-async def send(ctx, *, message):
+async def say(ctx, *, message):
     """Make the BOT say what you want"""
     await ctx.send(message)
 
