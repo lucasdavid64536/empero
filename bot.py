@@ -305,7 +305,7 @@ async def binfo(ctx):
         
 
 @bot.command()
-	async def infect(self, ctx, user: discord.Member = None, emoji=None):
+async def infect(self, ctx, user: discord.Member = None, emoji=None):
 		'Infects a user'
 		if (user is None) or (emoji is None):
 			return await ctx.send(':x: | Please, do `e?infect @<user> :emoji: , or the command will __NOT__ work')
@@ -337,9 +337,11 @@ async def binfo(ctx):
 			
 		infection = self.bot.loop.create_task(infect_task(self))
 		self.infections.update({str(user.id) + ';' + str(ctx.guild.id): infection})
-
-	@commands.command()
-	async def heal(self, ctx, user: discord.Member = None):
+		
+		
+		
+@bot.command()
+async def heal(self, ctx, user: discord.Member = None):
 		'Heals a user from a infection'
 		if user is None:
 			await ctx.send(':x: | Please, do `e?heal @user` , or the command will __NOT__ work')
