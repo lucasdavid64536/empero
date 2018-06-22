@@ -58,18 +58,7 @@ async def help2(ctx):
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
-@commands.cooldown(1, 5, commands.BucketType.user)  
-@bot.command()
-async def help3(ctx):
-    """Help"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 3")
-    em.add_field(name="**infect @user :emoji:**", value="""Infects an user with an emoji
-(by davfsa)""", inline=False)
-    em.add_field(name="**heal**", value='Heals a user (only if its infected)', inline=False)
-    em.add_field(name="**help2**", value='Second help page', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
+
 
 @bot.listen()
 async def on_message(message : discord.Message):
@@ -304,58 +293,6 @@ async def binfo(ctx):
     msg = await ctx.send(embed=em)
         
 
-@bot.command()
-async def infect(self, ctx, user: discord.Member = None, emoji=None):
-		'Infects a user'
-		if (user is None) or (emoji is None):
-			return await ctx.send(':x: | Please, do `e?infect @<user> :emoji: , or the command will __NOT__ work')
-			
-		emoji = self.bot.get_emoji(int(emoji.split(':')[2].strip('>'))) if '<:' in emoji or '<a:' in emoji else emoji 
-
-		def check(msg):
-			return ctx.guild.id == msg.guild.id and msg.author.id == user.id
-
-		async def infect_task(self):
-			await ctx.channel.send(((('`' + user.name) + '` is now infected with ') + str(emoji)) + ' for **1** hour')
-			start = time.monotonic()
-			while time.monotonic() - start < (60*60):
-				m = await self.bot.wait_for('message', check=check)
-				try:
-					await m.add_reaction(emoji)
-				except (discord.Forbidden, discord.HTTPException, discord.NotFound, discord.InvalidArgument):
-					pass
-			del self.infections[str(user.id) + ';' + str(ctx.guild.id)]
-
-		inf = self.infections.get((str(user.id) + ';') + str(ctx.guild.id), None)
-		if inf is not None:
-			return await ctx.send(('`' + user.name) + '` is already infected, you can`t infect him twice')
-			
-		try:
-			await ctx.message.add_reaction(emoji)
-		except:
-			return await ctx.send(':x: | The emoji wasn`t found')
-			
-		infection = self.bot.loop.create_task(infect_task(self))
-		self.infections.update({str(user.id) + ';' + str(ctx.guild.id): infection})
-		
-		
-		
-@bot.command()
-async def heal(self, ctx, user: discord.Member = None):
-		'Heals a user from a infection'
-		if user is None:
-			await ctx.send(':x: | Please, do `e?heal @user` , or the command will __NOT__ work')
-			return
-		if (user == ctx.author) and (ctx.author.id != 404708655578218511):
-			await ctx.send(":x: | You can not heal yourself")
-			return
-		inf = self.infections.get((str(user.id) + ';') + str(ctx.guild.id), None)
-		if inf is not None:
-			inf.cancel()
-			del self.infections[str(user.id) + ';' + str(ctx.guild.id)]
-			await ctx.send(('`' + user.name) + '` has been healed')
-		else:
-			await ctx.send(('`' + user.name) + '` wasn`t infected')
 
 
 bot.run(os.getenv("TOKEN"))
