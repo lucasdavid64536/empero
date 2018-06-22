@@ -57,7 +57,19 @@ async def help2(ctx):
     em.add_field(name="**support**", value='Returns the support server', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
-  
+ 
+@commands.cooldown(1, 5, commands.BucketType.user)  
+@bot.command()
+async def help3(ctx):
+    """Help"""
+    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
+    em.set_author(name="Empero Help 3")
+    em.add_field(name="**infect @user :emoji:**", value="""Infects an user with an emoji
+(by davfsa)""", inline=False)
+    em.add_field(name="**heal**", value='Heals a user (only if its infected)', inline=False)
+    em.add_field(name="**help2**", value='Second help page', inline=False)
+    em.set_thumbnail(url=ctx.me.avatar_url)
+    msg = await ctx.send(embed=em)
 
 @bot.listen()
 async def on_message(message : discord.Message):
