@@ -89,7 +89,7 @@ async def on_message(message : discord.Message):
 @bot.listen()
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f':no_entry: | Hey, You are being ratelimited! Try again in** {int(error.retry_after)} **seconds!', delete_after=5)
+        return await ctx.send(f':no_entry: | Hey, You are being ratelimited! Try again in** {int(error.retry_after)} **seconds!', delete_after=5)
     if isinstance(error, commands.CommandNotFound):
         return await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
     error = error.__cause__ or error
