@@ -90,6 +90,8 @@ async def on_message(message : discord.Message):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
             return await ctx.send(f':no_entry: | Hey, You are being ratelimited! Try again in** {int(error.retry_after)} **seconds!', delete_after=5)
+    if isinstance(error, commands.MissingPermission):
+            return await ctx.send(f':x: | I don`have permissions to do that, if you are the owner, make sure i have the Ban and Kick Players  permission')
     if isinstance(error, commands.CommandNotFound):
         return await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}', delete_after=5)
     error = error.__cause__ or error
