@@ -17,6 +17,27 @@ bot.remove_command('help')
 async def on_error(message, event, *args, **kwargs):
     await ctx.send(':o: | You __don`t__ have acces to this command!')
     
+@commands.cooldown(1, 5, commands.BucketType.user)     
+@bot.command()
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, member: discord.Member = None):
+    if member is None:
+        await ctx.send("Please provide a user to ban")
+    if member != ctx.author:
+        await ctx.guild.kick(member)
+        await ctx.send(f'{member} just got banned.')
+
+@commands.cooldown(1, 5, commands.BucketType.user) 
+@bot.command()
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member = None):
+    if member is None:
+        await ctx.send("Please provide a user to kick")
+    if member != ctx.author:
+        await ctx.guild.kick(member)
+        await ctx.send(f'{member} just got kicked.')
+    
+
         
 @bot.listen()
 async def on_ready():
