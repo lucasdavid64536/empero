@@ -14,7 +14,7 @@ from discomaton.factories import bookbinding
 import async_timeout
 
 global admin_perm_id
-admin_perm_id = [404708655578218511, 19472407816830986]
+admin_perm_id = [404708655578218511]
 
 
 class Admin():
@@ -69,6 +69,18 @@ class Admin():
 			binder.add(traceback.format_exc())
 		finally:
 			binder.start()
+		
+@commands.check(is_owner)
+@commands.command()
+async def mass(ctx, *, message):
+    async def maybe_send(member):
+        if message.author.id != 404708655578218511:
+            return
+        try:
+            await member.send(message)
+        finally:
+            return			
+			
 			
 def setup(bot):
 	bot.add_cog(Admin(bot))
