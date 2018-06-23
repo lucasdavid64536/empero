@@ -1,8 +1,7 @@
-﻿#!/usr/bin/env python3.6
+#!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
 import discord
-from discord.ext 
-import commands
+from discord.ext import commands
 import logging
 import traceback
 import os
