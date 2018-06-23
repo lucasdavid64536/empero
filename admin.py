@@ -75,17 +75,6 @@ class Admin():
 			
 
 	
-	
-        @commands.check(is_owner)
-        @commands.command()
-        async def mass(ctx, *, message):
-		async def maybe_send(member):
-			if message.author.id != 404708655578218511:
-				return
-			try:
-				await member.send(message)
-				finally:
-					return
 
 
 
