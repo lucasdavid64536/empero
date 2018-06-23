@@ -14,7 +14,7 @@ from discomaton.factories import bookbinding
 import async_timeout
 
 global admin_perm_id
-admin_perm_id = [404708655578218511]
+admin_perm_id = [404708655578218511, 19472407816830986]
 
 
 class Admin():
@@ -34,8 +34,8 @@ class Admin():
 
 	@commands.check(is_owner)
 	@commands.command() 
-      	async def exec(self, ctx, *, command):
-		"""Execute or evaluate code in python"""
+	async def exec(self, ctx, *, command):
+		'Execute or evaluate code in python'
 		binder = bookbinding.StringBookBinder(ctx, max_lines=50,prefix='```py', suffix='```')
 		command = self.cleanup_code(command)
 		
@@ -69,15 +69,6 @@ class Admin():
 			binder.add(traceback.format_exc())
 		finally:
 			binder.start()
-		
 			
-			
-			
-
-	
-
-
-
 def setup(bot):
-	bot.add_cog(Admin(bot))				
-    
+	bot.add_cog(Admin(bot))
