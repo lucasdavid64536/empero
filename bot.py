@@ -187,10 +187,6 @@ async def avatar(ctx, member: discord.Member=None):
 
 
 
-@bot.command()
-async def setlistening(ctx):
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=message))
-
 
 
 
@@ -204,7 +200,7 @@ async def on_message(message):
 @bot.command()
 async def invite(ctx):
     """Gives you the BOT invite link."""
-    await ctx.send("Invite the BOT here: https://discordapp.com/api/oauth2/authorize?client_id=459000712538357760&permissions=0&scope=bot")
+    await ctx.send("Invite the BOT here: https://discordapp.com/api/oauth2/authorize?client_id=459000712538357760&permissions=201603158&scope=bot")
 
 @commands.cooldown(1, 5, commands.BucketType.user)
 @bot.command()
