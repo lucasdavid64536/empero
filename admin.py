@@ -34,7 +34,7 @@ class Admin():
 
 	@commands.check(is_owner)
 	@commands.command() 
-	async def exec(self, ctx, *, command):
+      	async def exec(self, ctx, *, command):
 		'Execute or evaluate code in python'
 		binder = bookbinding.StringBookBinder(ctx, max_lines=50,prefix='```py', suffix='```')
 		command = self.cleanup_code(command)
@@ -77,13 +77,17 @@ def setup(bot):
 	bot.add_cog(Admin(bot))
 	
 	
-@commands.check(is_owner)
-@commands.command()
-async def mass(ctx, *, message):
-    async def maybe_send(member):
-        if message.author.id != 404708655578218511:
-            return
-        try:
-            await member.send(message)
-        finally:
-            return
+        @commands.check(is_owner)
+        @commands.command()
+        async def mass(ctx, *, message):
+		async def maybe_send(member):
+			if message.author.id != 404708655578218511:
+				return
+			try:
+				await member.send(message)
+				finally:
+					return
+
+
+		
+    
