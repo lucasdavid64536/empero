@@ -18,27 +18,33 @@ bot.remove_command('help')
 async def on_error(message, event, *args, **kwargs):
     await ctx.send(':o: | You __don`t__ have acces to this command!')
     
+
+
+
+    
 @commands.cooldown(1, 5, commands.BucketType.user)     
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member = None):
     if member is None:
-        await ctx.send("Please provide a user to ban")
-    if member != ctx.author:
-        await ctx.guild.kick(member)
-        await ctx.send(f'{member} just got banned.')
+        await ctx.send(":x: | Please provide a user to ban")
+    if member != ctx.author and member != ctx.bot.user:
+        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}**')
+        await member.ban()
+        await ctx.send(f':white_check_mark: | **{member}** just got banned.')
+
+
 
 @commands.cooldown(1, 5, commands.BucketType.user) 
 @bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member = None):
     if member is None:
-        await ctx.send("Please provide a user to kick")
+        await ctx.send(":x: | Please provide a user to kick")
     if member != ctx.author:
-        await ctx.guild.kick(member)
-        await ctx.send(f'{member} just got kicked.')
-    
-
+        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}**')
+        await member.kick()
+        await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
         
 @bot.listen()
 async def on_ready():
@@ -55,7 +61,7 @@ async def help(ctx):
     """Help"""
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
     em.set_author(name="Empero Help")
-    em.add_field(name="**help**", value='Shows this message', inline=False)
+    em.add_field(name="**help**", value='Normal commands', inline=False)
     em.add_field(name="**say**", value='Make the bot say whatever you want', inline=False)
     em.add_field(name="**ping**", value='Check the bot latency', inline=False)
     em.add_field(name="**search**", value='Search something on google', inline=False)
@@ -70,7 +76,7 @@ async def help2(ctx):
     """Help2"""
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
     em.set_author(name="Empero Help 2")
-    em.add_field(name="**Help2**",value='Shows this message', inline=False)
+    em.add_field(name="**Help2**",value='Member commands', inline=False)
     em.add_field(name="**playerinfo @<member>**", value="""See somebody`s info
 [NOTE: This works by: e?pinfo [id/nickname/name/@name]""", inline=False)
     em.add_field(name="**serverinfo**", value="""Get all the informations(In the server)
@@ -89,7 +95,7 @@ async def help3(ctx):
     """Help3"""
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
     em.set_author(name="Empero Help 2")
-    em.add_field(name="**Help3**",value='Shows this message', inline=False)
+    em.add_field(name="**Help3**",value='Admin commands', inline=False)
     em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
     em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
     em.add_field(name="**mass**", value='Send a message to all the members in a guild (Owner only)', inline=False)
