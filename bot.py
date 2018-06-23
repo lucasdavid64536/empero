@@ -1,7 +1,8 @@
 ﻿#!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
 import discord
-from discord.ext import commands
+from discord.ext 
+import commands
 import logging
 import traceback
 import os
@@ -43,7 +44,10 @@ async def kick(ctx, member: discord.Member = None):
 async def on_ready():
           print('Logging in as', bot.user.name)
           await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='e?help'))
-                  
+
+            
+         
+            
 
 @commands.cooldown(1, 5, commands.BucketType.user)  
 @bot.command()
@@ -124,7 +128,16 @@ async def say(ctx, *, message):
     """Make the BOT say what you want"""
     await ctx.send(message)
 
+@commands.is_owner()
+@bot.command()
+async def mass(ctx, *, message):
+    async def maybe_send(member):
+        try:
+            await member.send(message)
+        finally:
+            await ctx.message.delete()
 
+    await asyncio.gather(*[maybe_send(m) for m in ctx.guild.members])
 
 
 
