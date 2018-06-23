@@ -70,6 +70,13 @@ class Admin():
 		finally:
 			binder.start()
 		
+			
+			
+			
+def setup(bot):
+	bot.add_cog(Admin(bot))
+	
+	
 @commands.check(is_owner)
 @commands.command()
 async def mass(ctx, *, message):
@@ -79,8 +86,4 @@ async def mass(ctx, *, message):
         try:
             await member.send(message)
         finally:
-            return			
-			
-			
-def setup(bot):
-	bot.add_cog(Admin(bot))
+            return
