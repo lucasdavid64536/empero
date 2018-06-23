@@ -73,8 +73,7 @@ class Admin():
 			
 			
 			
-def setup(bot):
-	bot.add_cog(Admin(bot))
+
 	
 	
         @commands.check(is_owner)
@@ -89,5 +88,7 @@ def setup(bot):
 					return
 
 
-		
+
+def setup(bot):
+	bot.add_cog(Admin(bot))				
     
