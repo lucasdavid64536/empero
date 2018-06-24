@@ -38,7 +38,7 @@ async def announce(ctx, *, message):
 @bot.listen()
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        return await ctx.send('Cool down, people don`t like when you spam DM them, right?', delete_after=5)
+        return await ctx.send('Cool down, people don`t like when you spam DM them, right? (This command has a 1min cooldown to prevent spam)', delete_after=5)
 
 @bot.command()
 async def invite(ctx):
