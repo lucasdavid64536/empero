@@ -86,6 +86,7 @@ async def help2(ctx):
     em.add_field(name="**lenny**", value='Just a lenny face', inline=False)
     em.add_field(name="**respect**", value='Pay #respect', inline=False)
     em.add_field(name="**support**", value='Returns the support server', inline=False)
+    em.add_field(name="**help3**", value='3rd page', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
@@ -94,7 +95,7 @@ async def help2(ctx):
 async def help3(ctx):
     """Help3"""
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 2")
+    em.set_author(name="Empero Help 3")
     em.add_field(name="**Help3**",value='Admin commands', inline=False)
     em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
     em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
