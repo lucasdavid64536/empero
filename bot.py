@@ -29,7 +29,7 @@ async def ban(ctx, member: discord.Member = None):
     if member is None:
         await ctx.send(":x: | Please provide a user to ban")
     if member != ctx.author and member != ctx.bot.user:
-        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** for **{message}**')
+        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** ')
         await member.ban()
         await ctx.send(f':white_check_mark: | **{member}** just got banned.')
 
@@ -38,11 +38,11 @@ async def ban(ctx, member: discord.Member = None):
 @commands.cooldown(1, 5, commands.BucketType.user) 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member = None, message):
+async def kick(ctx, member: discord.Member = None):
     if member is None:
         await ctx.send(":x: | Please provide a user to kick")
     if member != ctx.author:
-        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}** for **{message}**')
+        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}**')
         await member.kick()
         await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
         
