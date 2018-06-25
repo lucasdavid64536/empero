@@ -1,7 +1,6 @@
 
 import discord
 from discord.ext import commands
-
 import asyncio
 import itertools
 import sys
@@ -22,7 +21,7 @@ ytdlopts = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0'  # ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0'  
 }
 
 ffmpegopts = {
@@ -50,8 +49,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.title = data.get('title')
         self.web_url = data.get('webpage_url')
 
-        # YTDL info dicts (data) have other useful information you might want
-        # https://github.com/rg3/youtube-dl/blob/master/README.md
 
     def __getitem__(self, item: str):
         """Allows us to access attributes similar to a dict.
@@ -110,7 +107,7 @@ class MusicPlayer:
         self.queue = asyncio.Queue()
         self.next = asyncio.Event()
 
-        self.np = None  # Now playing message
+        self.np = None  
         self.volume = .5
         self.current = None
 
@@ -133,8 +130,6 @@ class MusicPlayer:
                 return
 
             if not isinstance(source, YTDLSource):
-                # Source was probably a stream (not downloaded)
-                # So we should regather to prevent stream expiration
                 try:
                     source = await YTDLSource.regather_stream(source, loop=self.bot.loop)
                 except Exception as e:
@@ -268,8 +263,7 @@ class Music:
 
         player = self.get_player(ctx)
 
-        # If download is False, source will be a dict which will be used later to regather the stream.
-        # If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
+        
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
@@ -298,7 +292,7 @@ class Music:
             return
 
         vc.resume()
-        await ctx.send(f'**`{ctx.author}`**: Resumed the song!:play_pause:')
+        await ctx.send(f'**{ctx.author}** | Resumed the song!:play_pause:')
 
     @commands.command(name='skip', aliases=["next"])
     async def skip_(self, ctx):
