@@ -120,6 +120,7 @@ async def help3(ctx):
     em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
     em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
     em.add_field(name="**mass**", value='Send a message to all the members in a guild (Owner only)', inline=False)
+    em.add_field(name="**help4**", value='Send a message to all the members in a guild (Owner only)', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
