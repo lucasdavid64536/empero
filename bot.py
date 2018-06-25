@@ -1,12 +1,31 @@
-#!/usr/bin/env python3.6
-# -*- coding: utf-8 -*-
-import discord
-import random
-from discord.ext import commands
-import logging
-import traceback
 import asyncio
+
+import logging
+
+import inspect
+
 import os
+
+import sys
+
+import traceback
+
+import discord
+
+from discord.ext import commands
+
+from raven import Client
+
+# So I can actually see what the process is doing
+
+logging.basicConfig(level='INFO')
+
+cl = Client('https://96e5059d7abd47a5ae872c5f20e13b07:47a8bcfb99124e85a216637f731c9bf3@sentry.io/1208005')
+
+bot = commands.Bot(description='', command_prefix=commands.when_mentioned_or('e?'), pm_help=False)
+
+bot.remove_command('help')
+
 from discord import opus
 
 OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
@@ -32,15 +51,6 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
     raise RuntimeError('Could not load an opus lib. Tried %s' % (', '.join(opus_libs)))
 
 load_opus_lib()
-
-
-
-
-logging.basicConfig(level='INFO')
-bot = commands.Bot(command_prefix='e?')
-bot.load_extension("admin")
-bot.remove_command('help')
-bot.load_extension("music")
     
 @bot.listen()
 async def on_error(message, event, *args, **kwargs):
