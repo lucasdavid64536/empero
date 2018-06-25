@@ -69,6 +69,7 @@ async def help(ctx):
     em.add_field(name="**search**", value='Search something on google', inline=False)
     em.add_field(name="**avatar**", value='Get somebody`s avatar', inline=False)
     em.add_field(name="**help2**", value='Second help page', inline=False)
+    em.add_field(name="**8ball**", value='Ask the Magic 8-Ball', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
   
