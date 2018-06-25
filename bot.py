@@ -12,8 +12,8 @@ import os
 logging.basicConfig(level='INFO')
 bot = commands.Bot(command_prefix='e?')
 bot.load_extension("admin")
-bot.remove_command('help')
 bot.load_extension("music")
+bot.remove_command('help')
     
 @bot.listen()
 async def on_error(message, event, *args, **kwargs):
