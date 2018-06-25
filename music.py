@@ -251,6 +251,7 @@ class Music:
         search: str [Required]
             The song to search and retrieve using YTDL. This could be a simple search, an ID or URL.
         """
+		       if ctx.message.author is in voice_client:
         await ctx.trigger_typing()
 
         vc = ctx.voice_client
@@ -263,6 +264,8 @@ class Music:
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
+		       if ctx.message.author is not in voice_client:
+		       await ctx.send('You need to join a voice channel first')
 
     @commands.command(name='pause')
     async def pause_(self, ctx):
