@@ -131,7 +131,7 @@ async def help4(ctx):
     """Help4"""
     em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
     em.set_author(name="Empero Help 4")
-    em.add_field(name="**Help7**",value='Music commands', inline=False)
+    em.add_field(name="**Help4*",value='Music commands', inline=False)
     em.add_field(name="**play**", value="""Play some music""", inline=False)
     em.add_field(name="**pause**", value="""Pauses the music""", inline=False)
     em.add_field(name="**resume**", value="""Unpauses the track""", inline=False)
