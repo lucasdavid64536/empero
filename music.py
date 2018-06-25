@@ -46,7 +46,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
 
         if 'entries' in data:
-            # take first item from a playlist
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
@@ -128,5 +127,6 @@ class Music:
 
 
 
-
+def setup(bot):
+	bot.add_cog(Music(bot))
 
