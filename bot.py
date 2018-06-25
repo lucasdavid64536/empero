@@ -14,7 +14,6 @@ import discord
 
 from discord.ext import commands
 
-from raven import Client
 
 
 logging.basicConfig(level='INFO')
