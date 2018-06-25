@@ -22,7 +22,7 @@ ytdlopts = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0'  # ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0'  
 }
 
 ffmpegopts = {
@@ -50,8 +50,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.title = data.get('title')
         self.web_url = data.get('webpage_url')
 
-        # YTDL info dicts (data) have other useful information you might want
-        # https://github.com/rg3/youtube-dl/blob/master/README.md
+        
 
     def __getitem__(self, item: str):
         """Allows us to access attributes similar to a dict.
@@ -67,7 +66,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         data = await loop.run_in_executor(None, to_run)
 
         if 'entries' in data:
-            # take first item from a playlist
             data = data['entries'][0]
 
         await ctx.send(f'**{ctx.message.author.name}** Added `{data["title"]}` to the Queue.')
@@ -110,7 +108,7 @@ class MusicPlayer:
         self.queue = asyncio.Queue()
         self.next = asyncio.Event()
 
-        self.np = None  # Now playing message
+        self.np = None  
         self.volume = .5
         self.current = None
 
@@ -124,7 +122,6 @@ class MusicPlayer:
             self.next.clear()
 
             try:
-                # Wait for the next song. If we timeout cancel the player and disconnect...
                 async with timeout(300):  # 5 minutes...
                     source = await self.queue.get()
             except asyncio.TimeoutError:
@@ -133,8 +130,6 @@ class MusicPlayer:
                 return
 
             if not isinstance(source, YTDLSource):
-                # Source was probably a stream (not downloaded)
-                # So we should regather to prevent stream expiration
                 try:
                     source = await YTDLSource.regather_stream(source, loop=self.bot.loop)
                 except Exception as e:
@@ -149,12 +144,10 @@ class MusicPlayer:
             self.np = await self._channel.send(f'**Now Playing:** `{source.title}` Requested by: `{source.requester}`')
             await self.next.wait()
 
-            # Make sure the FFmpeg process is cleaned up.
             source.cleanup()
             self.current = None
 
             try:
-                # We are no longer playing this song...
                 await self.np.delete()
             except discord.HTTPException:
                 pass
@@ -267,9 +260,7 @@ class Music:
             await ctx.invoke(self.connect_)
 
         player = self.get_player(ctx)
-
-        # If download is False, source will be a dict which will be used later to regather the stream.
-        # If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
+                       
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
@@ -349,7 +340,6 @@ class Music:
             return await ctx.send('I am not currently playing anything!')
 
         try:
-            # Remove our previous now_playing message.
             await player.np.delete()
         except discord.HTTPException:
             pass
