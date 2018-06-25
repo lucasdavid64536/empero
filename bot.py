@@ -124,6 +124,23 @@ async def help3(ctx):
     msg = await ctx.send(embed=em)
  
 
+@commands.cooldown(1, 5, commands.BucketType.user)  
+@bot.command()
+async def help4(ctx):
+    """Help4"""
+    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
+    em.set_author(name="Empero Help 4")
+    em.add_field(name="**Help7**",value='Music commands', inline=False)
+    em.add_field(name="**play**", value="""Play some music""", inline=False)
+    em.add_field(name="**pause**", value="""Pauses the music""", inline=False)
+    em.add_field(name="**resume**", value="""Unpauses the track""", inline=False)
+    em.add_field(name="**queue**", value='See the following tracks', inline=False)
+    em.add_field(name="**join**", value='Makes the BOT join a voice channel', inline=False)
+    em.add_field(name="**playing**", value='Current song info', inline=False)
+    em.add_field(name="**vol**", value='Volume settings', inline=False)
+    em.set_thumbnail(url=ctx.me.avatar_url)
+    msg = await ctx.send(embed=em)
+
 @bot.listen()
 async def on_message(message : discord.Message):
     if bot.user.mentioned_in(message):
