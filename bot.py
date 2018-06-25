@@ -16,7 +16,6 @@ from discord.ext import commands
 
 from raven import Client
 
-# So I can actually see what the process is doing
 
 logging.basicConfig(level='INFO')
 
