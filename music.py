@@ -267,6 +267,11 @@ class Music:
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
+	
+	if ctx.author.voice is None:
+            print("Join a voice channel first!")    
+        
+        
 		       
 	
 	     
