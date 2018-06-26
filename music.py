@@ -120,7 +120,7 @@ class MusicPlayer:
             self.next.clear()
 
             try:
-                async with timeout(300):  # 5 minutes...
+                async with timeout(300): 
                     source = await self.queue.get()
             except asyncio.TimeoutError:
                 if self in self._cog.players.values():
@@ -263,6 +263,9 @@ class Music:
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
+		       
+	if ctx.author.voice == None:
+		       await ctx.send('Join a voice channel first!')
 		       
 
     @commands.command(name='pause')
