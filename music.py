@@ -264,8 +264,8 @@ class Music:
 
         await player.queue.put(source)
 		       
-	if ctx.author.voice == None:
-		       await ctx.send('Join a voice channel first!')
+	if ctx.author.voice == None
+             await ctx.send('Join a voice channel first!')
 		       
 
     @commands.command(name='pause')
