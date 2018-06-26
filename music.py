@@ -269,8 +269,7 @@ async def play_(self, ctx, *, search: str):
 
         await player.queue.put(source)
 
-        if ctx.author.voice is None:       
-                await ctx.send('Join a voice channel first!')
+
         
         
    
