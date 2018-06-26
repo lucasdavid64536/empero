@@ -246,7 +246,7 @@ class Music:
         await ctx.send(f'Successfully Connected to: **{channel}**', delete_after=15)
 
 		       
-		       @commands.command(name='play', aliases=['sing'])
+@commands.command(name='play', aliases=['sing'])
     async def play_(self, ctx, *, search: str):
         """Request a song and add it to the queue.
         This command attempts to join a valid voice channel if the bot is not already in one.
