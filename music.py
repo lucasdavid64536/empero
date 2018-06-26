@@ -268,12 +268,16 @@ async def play_(self, ctx, *, search: str):
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
         await player.queue.put(source)
-
- 
+	
+	
         
         
 		       
 	
+	     
+		       
+		       
+
 		       
 
     @commands.command(name='pause')
@@ -352,6 +356,7 @@ async def play_(self, ctx, *, search: str):
             return await ctx.send('I am not currently playing anything!')
 
         try:
+            # Remove our previous now_playing message.
             await player.np.delete()
         except discord.HTTPException:
             pass
@@ -383,7 +388,6 @@ async def play_(self, ctx, *, search: str):
         player.volume = vol / 100
         await ctx.send(f'**`{ctx.author}`**: Set the volume to **{vol}%**')
 
-
     @commands.command(name='stop', aliases=["leave"])
     async def stop_(self, ctx):
         """Stop the currently playing song and destroy the player.
@@ -398,4 +402,4 @@ async def play_(self, ctx, *, search: str):
         await self.cleanup(ctx.guild)
 
 def setup(bot):
-    bot.add_cog(Music(bot))
+bot.add_cog(Music(bot))
