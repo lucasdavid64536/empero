@@ -41,29 +41,39 @@ async def l8ball(ctx):
     await ctx.send(random.choice(['● It is certain.', '● It is decidedly so.', '● Without a doubt.', '● Yes - definitely.', '● You may rely on it', '● As I see it, yes.', '● Most likely.', '● Outlook good.', '● Yes.', '● Signs point to yes.', '● Reply hazy, try again', '● Ask again later.', '● Better not tell you now.', '● Cannot predict now.', '● Concentrate and ask again.', '● Don`t count on it.', '● My reply is no.', '● My sources say no', '● Outlook not so good.', '● Very doubtful.' ]))
 
     
-@commands.cooldown(1, 5, commands.BucketType.user)     
-@bot.command()
-@commands.has_permissions(ban_members=True)
-async def ban(ctx, member: discord.Member = None):
-    if member is None:
-        await ctx.send(":x: | Please provide a user to ban")
-    if member != ctx.author and member != ctx.bot.user:
-        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** ')
-        await member.ban()
-        await ctx.send(f':white_check_mark: | **{member}** just got banned.')
-
-
-
 @commands.cooldown(1, 5, commands.BucketType.user) 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member = None):
+async def kick(ctx, member: discord.Member = None, reason = None):
     if member is None:
         await ctx.send(":x: | Please provide a user to kick")
     if member != ctx.author:
-        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}**')
+        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}** for **{reason}**')
         await member.kick()
         await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
+    if reason is none:
+        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}** for no reason')
+        await member.kick()
+        await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
+
+
+
+
+
+@commands.cooldown(1, 5, commands.BucketType.user)     
+@bot.command()
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, member: discord.Member = None, reason = None):
+    if member is None:
+        await ctx.send(":x: | Please provide a user to ban")
+    if member != ctx.author and member != ctx.bot.user:
+        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** for **{reason}** ')
+        await member.ban()
+        await ctx.send(f':white_check_mark: | **{member}** just got banned.')
+    if reason is None:
+        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** for no reason')
+        await member.ban()
+        await ctx.send(f':white_check_mark: | **{member}** just got banned.')
         
 @bot.listen()
 async def on_ready():
@@ -85,8 +95,8 @@ async def help(ctx):
     em.add_field(name="**ping**", value='Check the bot latency', inline=False)
     em.add_field(name="**search**", value='Search something on google', inline=False)
     em.add_field(name="**avatar**", value='Get somebody`s avatar', inline=False)
-    em.add_field(name="**help2**", value='Second help page', inline=False)
     em.add_field(name="**8ball**", value='Ask the Magic 8-Ball', inline=False)
+    em.add_field(name="**help2**", value='Second help page', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
   
@@ -139,7 +149,6 @@ async def help4(ctx):
     em.add_field(name="**pause**", value='Pause the song', inline=False)
     em.add_field(name="**resume**", value='Unpause the song', inline=False)
     em.add_field(name="**join**", value='Connects to a voice channel', inline=False)
-    em.add_field(name="**help4**", value='4th page', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
