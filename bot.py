@@ -15,7 +15,7 @@ logging.basicConfig(level='INFO')
 bot = commands.Bot(command_prefix='e?')
 bot.load_extension("admin")
 bot.remove_command('help')
-bot.load_extension("music")
+
 OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
@@ -120,27 +120,12 @@ async def help3(ctx):
     em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
     em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
     em.add_field(name="**mass**", value='Send a message to all the members in a guild (BOT Owner only)', inline=False)
-    em.add_field(name="**help4**", value='4th page', inline=False)
+    
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
 
-@commands.cooldown(1, 5, commands.BucketType.user)  
-@bot.command()
-async def help4(ctx):
-    """Help4"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 4")
-    em.add_field(name="**Help4**",value='Music commands', inline=False)
-    em.add_field(name="**play**", value="""Play some music""", inline=False)
-    em.add_field(name="**pause**", value="""Pauses the music""", inline=False)
-    em.add_field(name="**resume**", value="""Unpauses the track""", inline=False)
-    em.add_field(name="**queue**", value='See the following tracks', inline=False)
-    em.add_field(name="**join**", value='Makes the BOT join a voice channel', inline=False)
-    em.add_field(name="**playing**", value='Current song info', inline=False)
-    em.add_field(name="**vol**", value='Volume settings', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
+
 
 @bot.listen()
 async def on_message(message : discord.Message):
