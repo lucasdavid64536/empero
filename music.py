@@ -265,7 +265,7 @@ class Music:
         await player.queue.put(source)
 		       
 	if ctx.message.voice == None:
-		       await ctx.send('Join a voice channel first')
+	    await ctx.send('Join a voice channel first')
 	     
 		       
 		       
