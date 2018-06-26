@@ -120,12 +120,29 @@ async def help3(ctx):
     em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
     em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
     em.add_field(name="**mass**", value='Send a message to all the members in a guild (BOT Owner only)', inline=False)
-    
+    em.add_field(name="**help4**", value='4th page', inline=False)
     em.set_thumbnail(url=ctx.me.avatar_url)
     msg = await ctx.send(embed=em)
  
 
-
+@commands.cooldown(1, 5, commands.BucketType.user)  
+@bot.command()
+async def help4(ctx):
+    """Help3"""
+    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
+    em.set_author(name="Empero Help 4")
+    em.add_field(name="**Help4*",value='Music commands', inline=False)
+    em.add_field(name="**play**", value='Plays a song', inline=False)
+    em.add_field(name="**stop**", value='Stops everything and leaves the voice channel', inline=False)
+    em.add_field(name="**queue**", value='Following tracks', inline=False)
+    em.add_field(name="**skip**", value='Plays the next song', inline=False)
+    em.add_field(name="**pause**", value='Pause the song', inline=False)
+    em.add_field(name="**resume**", value='Unpause the song', inline=False)
+    em.add_field(name="**join**", value='Connects to a voice channel', inline=False)
+    em.add_field(name="**help4**", value='4th page', inline=False)
+    em.set_thumbnail(url=ctx.me.avatar_url)
+    msg = await ctx.send(embed=em)
+ 
 
 @bot.listen()
 async def on_message(message : discord.Message):
