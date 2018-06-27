@@ -21,7 +21,7 @@ ytdlopts = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0'  # ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0'  
 }
 
 ffmpegopts = {
@@ -63,7 +63,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         data = await loop.run_in_executor(None, to_run)
 
         if 'entries' in data:
-            # take first item from a playlist
             data = data['entries'][0]
 
         await ctx.send(f':musical_note: | **{ctx.message.author.name}** Added **{data["title"]}** to the Queue.')
@@ -106,7 +105,7 @@ class MusicPlayer:
         self.queue = asyncio.Queue()
         self.next = asyncio.Event()
 
-        self.np = None  # Now playing message
+        self.np = None  
         self.volume = .5
         self.current = None
 
@@ -131,7 +130,7 @@ class MusicPlayer:
                 try:
                     source = await YTDLSource.regather_stream(source, loop=self.bot.loop)
                 except Exception as e:
-                    await self._channel.send(f'There was an error processing your song.\n'
+                    await self._channel.send(f':hammer_pick: | There was an error processing your song.\n'
                                              f'```css\n[{e}]\n```')
                     continue
 
@@ -142,7 +141,6 @@ class MusicPlayer:
             self.np = await self._channel.send(f'**Now Playing:** `{source.title}` Requested by: `{source.requester}`')
             await self.next.wait()
 
-            # Make sure the FFmpeg process is cleaned up.
             source.cleanup()
             self.current = None
 
@@ -232,14 +230,14 @@ class Music:
             try:
                 await vc.move_to(channel)
             except asyncio.TimeoutError:
-                raise VoiceConnectionError(f'Moving to channel: <{channel}> timed out.')
+                raise VoiceConnectionError(f':hammer: | Moving to channel: <{channel}> timed out.')
         else:
             try:
                 await channel.connect()
             except asyncio.TimeoutError:
-                raise VoiceConnectionError(f'Connecting to channel: <{channel}> timed out.')
+                raise VoiceConnectionError(f':x: | Connecting to channel: <{channel}> timed out.')
 
-        await ctx.send(f'Successfully Connected to: **{channel}**', delete_after=15)
+        await ctx.send(f':ballot_box_with_check: | Successfully Connected to: **{channel}**', delete_after=15)
 
     @commands.command(name='play', aliases=['sing'])
     async def play_(self, ctx, *, search: str):
@@ -286,7 +284,7 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently playing anything!', delete_after=20)
+            return await ctx.send(':x: | I am not currently playing anything!', delete_after=20)
         elif not vc.is_paused():
             return
 
