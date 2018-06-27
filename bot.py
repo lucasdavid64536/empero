@@ -320,6 +320,19 @@ async def pinfo(ctx, member: discord.Member=None):
     msg = await ctx.send(embed=em)
 
 
+async def presence():
+    await bot.wait_until_ready()
+    while not bot.is_closed():
+        a = 0
+        for i in bot.guilds:
+            for u in i.members:
+                if u.bot == False:
+                    a = a + 1
+
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='%s servers | e?help' % (a, len(bot.guilds))))
+        await sleep(30)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='%s users | e?help' % (a, len(bot.guilds))))
+        await sleep(30)
 
 
 
@@ -365,5 +378,5 @@ async def binfo(ctx):
 
 
 
-
+bot.loop.create_task(presence())
 bot.run(os.getenv("TOKEN"))
