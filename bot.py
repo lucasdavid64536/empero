@@ -84,73 +84,41 @@ async def on_ready():
          
             
 
-@commands.cooldown(1, 5, commands.BucketType.user)  
+@commands.cooldown(1, 5, commands.BucketType.user)
 @bot.command()
 async def help(ctx):
-    """Help"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help")
-    em.add_field(name="**help**", value='Normal commands', inline=False)
-    em.add_field(name="**say**", value='Make the bot say whatever you want', inline=False)
-    em.add_field(name="**ping**", value='Check the bot latency', inline=False)
-    em.add_field(name="**search**", value='Search something on google', inline=False)
-    em.add_field(name="**avatar**", value='Get somebody`s avatar', inline=False)
-    em.add_field(name="**8ball**", value='Ask the Magic 8-Ball', inline=False)
-    em.add_field(name="**help2**", value='Second help page', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
+    await ctx.author.send("""    Empero commands:
+**e?say** : Make the bot say whatever you want
+**e?ping** : Check the bot latency
+**e?search** : Search something on Google
+**e?avatar** : Get a player's avatar
+**e?8ball** : Ask the Magic 8-Ball""")
+    await ctx.author.send("""
+**e?playerinfo @<member>** : Get a member's info
+**e?serverinfo** Get a guild/server info
+**e?botinfo** : Get the bot info
+**e?lenny** : Just a lenny face
+**e?respect** : Pay #respect
+**e?support** : Returns the BOT support server""")
+    await ctx.author.send("""
+**e?kick** : Kick a member (works only if the player has the Kick perm.)
+**e?ban** : Ban a member (works only if the player has the Ban perm.)
+**e?mass** : Sends a message to all members in a guild (BOT Owner only)
+""")
+    await ctx.author.send("""
+**e?play** : Play a song
+**e?stop** : Stops the track
+**e?queue** : See the following tracks
+**e?skip** : Plays the next song
+**e?pause** : Pause the track
+**e?resume** : Unpause the track
+**e?join** : Join a voice channel""")
+    await ctx.send(f':mailbox_with_mail:  | ** {ctx.author.name} ** , check your DMs!')
+
   
-@commands.cooldown(1, 5, commands.BucketType.user)  
-@bot.command()
-async def help2(ctx):
-    """Help2"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 2")
-    em.add_field(name="**Help2**",value='Member commands', inline=False)
-    em.add_field(name="**playerinfo @<member>**", value="""See somebody`s info
-[NOTE: This works by: e?pinfo [id/nickname/name/@name]""", inline=False)
-    em.add_field(name="**serverinfo**", value="""Get all the informations(In the server)
-[NOTE: e?sinfo works too]""", inline=False)
-    em.add_field(name="**botinfo**", value="""Get all the bot information
-[NOTE: e?binfo works too]""", inline=False)
-    em.add_field(name="**lenny**", value='Just a lenny face', inline=False)
-    em.add_field(name="**respect**", value='Pay #respect', inline=False)
-    em.add_field(name="**support**", value='Returns the support server', inline=False)
-    em.add_field(name="**help3**", value='3rd page', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
- 
-@commands.cooldown(1, 5, commands.BucketType.user)  
-@bot.command()
-async def help3(ctx):
-    """Help3"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 3")
-    em.add_field(name="**Help3**",value='Admin commands', inline=False)
-    em.add_field(name="**kick**", value='Kicks a member (works only if the members has the Kick permission)', inline=False)
-    em.add_field(name="**ban**", value='Bans a member (works only if the members has the Ban permission)', inline=False)
-    em.add_field(name="**mass**", value='Send a message to all the members in a guild (BOT Owner only)', inline=False)
-    em.add_field(name="**help4**", value='4th page', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
+
  
 
-@commands.cooldown(1, 5, commands.BucketType.user)  
-@bot.command()
-async def help4(ctx):
-    """Help3"""
-    em = discord.Embed(title="".format(ctx.guild.name), description="", color=discord.Colour.blue())
-    em.set_author(name="Empero Help 4")
-    em.add_field(name="**Help4**",value='Music commands', inline=False)
-    em.add_field(name="**play**", value='Plays a song', inline=False)
-    em.add_field(name="**stop**", value='Stops everything and leaves the voice channel', inline=False)
-    em.add_field(name="**queue**", value='Following tracks', inline=False)
-    em.add_field(name="**skip**", value='Plays the next song', inline=False)
-    em.add_field(name="**pause**", value='Pause the song', inline=False)
-    em.add_field(name="**resume**", value='Unpause the song', inline=False)
-    em.add_field(name="**join**", value='Connects to a voice channel', inline=False)
-    em.set_thumbnail(url=ctx.me.avatar_url)
-    msg = await ctx.send(embed=em)
  
 
 @bot.listen()
