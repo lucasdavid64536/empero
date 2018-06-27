@@ -66,7 +66,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist
             data = data['entries'][0]
 
-        await ctx.send(f'**{ctx.message.author.name}** Added `{data["title"]}` to the Queue.')
+        await ctx.send(f':musical_note: | **{ctx.message.author.name}** Added **{data["title"]}** to the Queue.')
 
         if download:
             source = ytdl.prepare_filename(data)
@@ -188,7 +188,7 @@ class Music:
         """A local error handler for all errors arising from commands in this cog."""
         if isinstance(error, commands.NoPrivateMessage):
             try:
-                return await ctx.send('**This command can not be used in Private Messages.**')
+                return await ctx.send('**:x: | This command can not be used in Private Messages.**')
             except discord.HTTPException:
                 pass
         elif isinstance(error, InvalidVoiceChannel):
@@ -222,7 +222,7 @@ class Music:
             try:
                 channel = ctx.author.voice.channel
             except AttributeError:
-                raise InvalidVoiceChannel('No channel to join. Please either specify a valid channel or join one.')
+                raise InvalidVoiceChannel(':x: | No channel to join. Please either specify a valid channel or join one.')
 
         vc = ctx.voice_client
 
@@ -273,12 +273,12 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_playing():
-            return await ctx.send('I am not currently playing anything!', delete_after=20)
+            return await ctx.send(':x: | I am not currently playing anything!', delete_after=20)
         elif vc.is_paused():
             return
 
         vc.pause()
-        await ctx.send(f'**`{ctx.author}`**: Paused the song!:pause_button:')
+        await ctx.send(f':pause_button: | **`{ctx.author}`**: Paused the song!')
 
     @commands.command(name='resume', aliases=["continue", "start"])
     async def resume_(self, ctx):
@@ -291,7 +291,7 @@ class Music:
             return
 
         vc.resume()
-        await ctx.send(f'**`{ctx.author}`**: Resumed the song!:play_pause:')
+        await ctx.send(f':play_pause: | **`{ctx.author}`**: Resumed the song!')
 
     @commands.command(name='skip', aliases=["next"])
     async def skip_(self, ctx):
@@ -299,7 +299,7 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently playing anything!', delete_after=20)
+            return await ctx.send(':x: | I am not currently playing anything!', delete_after=20)
 
         if vc.is_paused():
             pass
@@ -307,7 +307,7 @@ class Music:
             return
 
         vc.stop()
-        await ctx.send(f'**`{ctx.author}`**: Skipped the song!:fast_forward:')
+        await ctx.send(f':fast_forward: | **`{ctx.author}`**: Skipped the song!')
 
     @commands.command(name='queue', aliases=['q', 'playlist', "queueinfo"])
     async def queue_info(self, ctx):
@@ -315,11 +315,11 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently connected to voice!', delete_after=20)
+            return await ctx.send(':speaker: | I am not currently connected to voice!', delete_after=20)
 
         player = self.get_player(ctx)
         if player.queue.empty():
-            return await ctx.send('There are currently no more queued songs.')
+            return await ctx.send(':musical_score: | There are currently no more queued songs.')
 
 
 		       
@@ -336,11 +336,11 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently connected to voice!', delete_after=20)
+            return await ctx.send(':speaker: | I am not currently connected to voice!', delete_after=20)
 
         player = self.get_player(ctx)
         if not player.current:
-            return await ctx.send('I am not currently playing anything!')
+            return await ctx.send(':speaker: I am not currently playing anything!')
 
         try:
             # Remove our previous now_playing message.
@@ -348,8 +348,8 @@ class Music:
         except discord.HTTPException:
             pass
 
-        player.np = await ctx.send(f'**Now Playing:** `{vc.source.title}` '
-                                   f'requested by `{vc.source.requester}`')
+        player.np = await ctx.send(f':musical_note: | Now Playing: **{vc.source.title}** '
+                                   f'requested by **{vc.source.requester}**')
 
     @commands.command(name='volume', aliases=['vol'])
     async def change_volume(self, ctx, *, vol: float):
@@ -362,10 +362,10 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently connected to voice!', delete_after=20)
+            return await ctx.send(':x: | I am not currently connected to voice!', delete_after=20)
 
         if not 0 < vol < 101:
-            return await ctx.send('Please enter a value between 1 and 100.')
+            return await ctx.send(':x: | Please enter a value between 1 and 100.')
 
         player = self.get_player(ctx)
 
@@ -373,7 +373,7 @@ class Music:
             vc.source.volume = vol / 100
 
         player.volume = vol / 100
-        await ctx.send(f'**`{ctx.author}`**: Set the volume to **{vol}%**')
+        await ctx.send(f':loudspeaker:  | **`{ctx.author}`**: Set the volume to **{vol}%**')
 
     @commands.command(name='stop', aliases=["leave"])
     async def stop_(self, ctx):
@@ -384,7 +384,7 @@ class Music:
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently playing anything!', delete_after=20)
+            return await ctx.send(':speaker: I am not currently playing anything!', delete_after=20)
 
         await self.cleanup(ctx.guild)
 
