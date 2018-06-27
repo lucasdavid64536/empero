@@ -78,7 +78,7 @@ async def ban(ctx, member: discord.Member = None, reason = None):
 @bot.listen()
 async def on_ready():
           print('Logging in as', bot.user.name)
-          await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='e?help'))
+          await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='e?help'))
 
             
          
