@@ -105,6 +105,7 @@ async def help(ctx):
 **e?kick** : Kick a member (works only if the player has the Kick perm.)
 **e?ban** : Ban a member (works only if the player has the Ban perm.)
 **e?mass** : Sends a message to all members in a guild (BOT Owner only)
+**e?restart** : Restarts the bot (BOT Owner only)
 """)
     await ctx.author.send("""
 **e?play** : Play a song
