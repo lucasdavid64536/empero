@@ -33,7 +33,7 @@ class Admin():
 		return content 
 
 	@commands.check(is_owner)
-	@commands.command() 
+	@commands.command(aliases= ["execute", "eval", "evaluate"]) 
 	async def exec(self, ctx, *, command):
 		'Execute or evaluate code in python'
 		binder = bookbinding.StringBookBinder(ctx, max_lines=50,prefix='```py', suffix='```')
