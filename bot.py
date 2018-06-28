@@ -177,6 +177,10 @@ async def mass(ctx, *, message):
     await asyncio.gather(*[maybe_send(m) for m in ctx.guild.members])
 
 
+@commands.is_owner()
+@bot.command()
+async def restart(ctx):
+    await ctx.bot.logout()
 
 
 
