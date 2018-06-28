@@ -45,15 +45,11 @@ async def l8ball(ctx):
 @commands.cooldown(1, 5, commands.BucketType.user) 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member = None, *, reason = None):
+async def kick(ctx, member: discord.Member = None, *, reason = no reason):
     if member is None:
         await ctx.send(":x: | Please provide a user to kick")
     if member != ctx.author:
         await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}** for **{reason}**')
-        await member.kick()
-        await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
-    if reason is None:
-        await member.send(f'You just got kicked by **{ctx.message.author}** on ** {ctx.guild.name}** for no reason')
         await member.kick()
         await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
 
@@ -66,17 +62,15 @@ async def botcheck(ctx):
 @commands.cooldown(1, 5, commands.BucketType.user)     
 @bot.command()
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, member: discord.Member = None, *, reason = None):
+async def ban(ctx, member: discord.Member = None, *, reason = no reason):
     if member is None:
         await ctx.send(":x: | Please provide a user to ban")
     if member != ctx.author and member != ctx.bot.user:
         await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** for **{reason}** ')
         await member.ban()
         await ctx.send(f':white_check_mark: | **{member}** just got banned.')
-    if reason is None:
-        await member.send(f'You just got banned by **{ctx.message.author}** on ** {ctx.guild.name}** for no reason')
-        await member.ban()
-        await ctx.send(f':white_check_mark: | **{member}** just got banned.')
+  
+     
         
 @bot.listen()
 async def on_ready():
