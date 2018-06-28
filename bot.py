@@ -45,7 +45,7 @@ async def l8ball(ctx):
 @commands.cooldown(1, 5, commands.BucketType.user) 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member = None, *, reason = no reason):
+async def kick(ctx, member: discord.Member = None, *, reason = None):
     if member is None:
         await ctx.send(":x: | Please provide a user to kick")
     if member != ctx.author:
@@ -62,7 +62,7 @@ async def botcheck(ctx):
 @commands.cooldown(1, 5, commands.BucketType.user)     
 @bot.command()
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, member: discord.Member = None, *, reason = no reason):
+async def ban(ctx, member: discord.Member = None, *, reason = None):
     if member is None:
         await ctx.send(":x: | Please provide a user to ban")
     if member != ctx.author and member != ctx.bot.user:
