@@ -58,7 +58,9 @@ async def kick(ctx, member: discord.Member = None, reason = None):
         await ctx.send(f':white_check_mark: | **{member}** just got kicked.')
 
 
-
+@bot.check
+async def botcheck(ctx):
+    return not ctx.message.author.bot
 
 
 @commands.cooldown(1, 5, commands.BucketType.user)     
