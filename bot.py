@@ -180,12 +180,11 @@ async def mass(ctx, *, message):
 
 @commands.is_owner()
 @bot.command()
-async def restart(ctx):
-    await ctx.send('Restarting...')
+async def shutdown(ctx):
+    await ctx.send('Shutting down...')
     await sleep(5)
     await ctx.bot.logout()
-    await ctx.send('Done!')
-
+   
 
 
 @commands.cooldown(1, 5, commands.BucketType.user)
