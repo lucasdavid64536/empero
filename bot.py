@@ -181,7 +181,10 @@ async def mass(ctx, *, message):
 @commands.is_owner()
 @bot.command()
 async def restart(ctx):
+    await ctx.send('Restarting...')
+    await sleep(5)
     await ctx.bot.logout()
+    await ctx.send('Done!')
 
 
 
