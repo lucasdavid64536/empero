@@ -160,7 +160,7 @@ async def search(ctx, *, query):
 @bot.command()
 async def say(ctx, *, message):
     """Make the BOT say what you want"""
-    await ctx.send(message)
+    await ctx.send(f' ** {ctx.author.name} said: ** {message}')
 
 @commands.is_owner()
 @bot.command()
