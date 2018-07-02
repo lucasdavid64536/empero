@@ -70,7 +70,10 @@ async def ban(ctx, member: discord.Member = None, *, reason = None):
         await member.ban()
         await ctx.send(f':white_check_mark: | **{member}** just got banned.')
   
-     
+@bot.command(aliases= ["kitten"])
+async def cat(ctx):
+    fp = "cat/{}".format(random.choice(os.listdir("cat")))
+    await ctx.send(file=discord.File(fp))    
         
 @bot.listen()
 async def on_ready():
@@ -102,6 +105,7 @@ async def help(ctx):
 **e?ban** : Ban a member (works only if the player has the Ban perm.)
 **e?mass** : Sends a message to all members in a guild (BOT Owner only)
 **e?shutdown** : Shuts down the bot (BOT Owner only)
+**e?cat** ; Something cute is going on here
 """)
     await ctx.author.send("""
 **e?play** : Play a song
