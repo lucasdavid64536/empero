@@ -70,7 +70,7 @@ async def ban(ctx, member: discord.Member = None, *, reason = None):
         await member.ban()
         await ctx.send(f':white_check_mark: | **{member}** just got banned.')
   
-@bot.command(aliases= ["kitten"])
+@bot.command(aliases= ["kitten", "kitty"])
 async def cat(ctx):
     fp = "cat/{}".format(random.choice(os.listdir("cat")))
     await ctx.send(file=discord.File(fp))    
@@ -110,7 +110,7 @@ async def help(ctx):
 **e?ban** : Ban a member (works only if the player has the Ban perm.)
 **e?mass** : Sends a message to all members in a guild (BOT Owner only)
 **e?shutdown** : Shuts down the bot (BOT Owner only)
-**e?purge** : Clears a number of messages (works only if the player has the Manage Server perm.)
+**e?purge** : Clears a number of messages (works only if the player has the Manage Channels perm.)
 **e?cat** : Something cute is going on here
 """)
     await ctx.author.send("""
