@@ -80,7 +80,12 @@ async def on_ready():
           print('Logging in as', bot.user.name)
        
 
-            
+@bot.command(aliases= ["clear", "prune", "delete"])
+@commands.has_permissions(manage_server=True)
+async def purge2(ctx, number : int):
+    await ctx.message.delete()
+    await ctx.channel.purge(limit=number)
+    await ctx.message.channel.send(':thumbsup: | Messages deleted succefully!', delete_after=10)            
          
             
 
@@ -105,7 +110,8 @@ async def help(ctx):
 **e?ban** : Ban a member (works only if the player has the Ban perm.)
 **e?mass** : Sends a message to all members in a guild (BOT Owner only)
 **e?shutdown** : Shuts down the bot (BOT Owner only)
-**e?cat** ; Something cute is going on here
+**e?purge** : Clears a number of messages (works only if the player has the Manage Server perm.)
+**e?cat** : Something cute is going on here
 """)
     await ctx.author.send("""
 **e?play** : Play a song
