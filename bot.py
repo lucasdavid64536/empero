@@ -81,7 +81,7 @@ async def on_ready():
        
 
 @bot.command(aliases= ["clear", "prune", "delete"])
-@commands.has_permissions(manage_channels=True)
+@commands.has_permissions(manage_server=True)
 async def purge(ctx, number : int):
     await ctx.message.delete()
     await ctx.channel.purge(limit=number)
