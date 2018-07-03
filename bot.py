@@ -13,7 +13,7 @@ from asyncio import sleep
 
 
 logging.basicConfig(level='INFO')
-bot = commands.Bot(command_prefix='e?')
+bot = commands.Bot(command_prefix='f.')
 bot.load_extension("admin")
 bot.remove_command('help')
 bot.load_extension("music")
